@@ -1,4 +1,5 @@
 import ActivityBase from "@/components/ActivityBase";
+import { Stockipile } from "@/components/Stockpile";
 import { World } from "@/components/World";
 import { useTheme } from "@/hooks/useThemeColor";
 import { DotIcon, MaskSadIcon } from "phosphor-react-native";
@@ -41,6 +42,7 @@ export default function HomeScreen() {
         </View>
       </View>
       <World />
+      <Stockipile />
     </ActivityBase>
   );
 }

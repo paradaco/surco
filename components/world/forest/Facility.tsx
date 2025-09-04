@@ -16,7 +16,7 @@ const Facility = ({ id }: BuildingProps) => {
   } = useTheme();
 
   const { data } = useSuspenseQuery({
-    queryKey: [buildingQuery, id],
+    queryKey: ["world", "forrest", "logger", id],
     queryFn: () => getBuildingLevel(id),
   });
 
