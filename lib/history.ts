@@ -37,15 +37,15 @@ export const getCellHistory = (id: Building["id"], from: Date, to: Date, tick: n
     let value = 0;
 
     if (level1Built && isWithinInterval(tickStartTime, level1Built)) {
-      value += 1;
+      value = 1;
     }
 
     if (level2Date && isAfter(tickStartTime, level2Date)) {
-      value += 2;
+      value = 2;
     }
 
     if (level3Date && isAfter(tickStartTime, level3Date)) {
-      value += 3;
+      value = 3;
     }
 
     return {

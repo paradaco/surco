@@ -6,8 +6,9 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { subDays } from "date-fns";
 import { DotIcon } from "phosphor-react-native";
 import { Text, View } from "react-native";
+import Container from "./Container";
 
-export const Stockipile = () => {
+export const Stockpile = () => {
   const { data: logsPerTick } = useLogsPerTick();
   const { data: stonePerTick } = useStonesPerTick();
   const { data: waterPerTick } = useWaterPerTick();
@@ -22,15 +23,19 @@ export const Stockipile = () => {
   const { data: grassTotal } = useGrassTotal(startDate);
 
   const {
-    colors: { forestPrimary, stonePrimary, waterPrimary, grassPrimary },
+    colors: { forestSecondary, stoneSecondary, waterSecondary, grassSecondary },
   } = useTheme();
 
   return (
-    <View style={{ width: "100%", alignItems: "center", marginTop: 32 }}>
-      {/* <StockedResource color={forestPrimary} total={totalLogs} perTick={logsPerTick} />
-      <StockedResource color={stonePrimary} total={stoneTotal} perTick={stonePerTick} />
-      <StockedResource color={waterPrimary} total={waterTotal} perTick={waterPerTick} />
-      <StockedResource color={grassPrimary} total={grassTotal} perTick={foodPetTick} /> */}
+    <View style={{ width: "100%", alignItems: "center", flexDirection: "column", gap: 16 }}>
+      <Container style={{ flex: 1, width: "100%", flexDirection: "row", justifyContent: "space-evenly" }}>
+        <StockedResource color={forestSecondary} total={totalLogs} perTick={logsPerTick} />
+        <StockedResource color={stoneSecondary} total={stoneTotal} perTick={stonePerTick} />
+      </Container>
+      <Container style={{ flex: 1, width: "100%", flexDirection: "row", justifyContent: "space-evenly" }}>
+        <StockedResource color={waterSecondary} total={waterTotal} perTick={waterPerTick} />
+        <StockedResource color={grassSecondary} total={grassTotal} perTick={foodPetTick} />
+      </Container>
     </View>
   );
 };
@@ -77,22 +82,30 @@ const useForestTotal = (from: Date) =>
   useSuspenseQuery({
     queryKey: queryKeys.world.resource.forest.total,
     queryFn: () => getResourceOutput("forest", from, new Date(), 5000),
+    // refetchInterval: 5000,
+    refetchOnWindowFocus: true,
   });
 
 const useStoneTotal = (from: Date) =>
   useSuspenseQuery({
     queryKey: queryKeys.world.resource.stone.total,
     queryFn: () => getResourceOutput("stone", from, new Date(), 5000),
+    // refetchInterval: 5000,
+    refetchOnWindowFocus: true,
   });
 
 const useWaterTotal = (from: Date) =>
   useSuspenseQuery({
-    queryKey: queryKeys.world.resource.stone.total,
+    queryKey: queryKeys.world.resource.water.total,
     queryFn: () => getResourceOutput("water", from, new Date(), 5000),
+    // refetchInterval: 5000,
+    refetchOnWindowFocus: true,
   });
 
 const useGrassTotal = (from: Date) =>
   useSuspenseQuery({
     queryKey: queryKeys.world.resource.grass.total,
     queryFn: () => getResourceOutput("grass", from, new Date(), 5000),
+    // refetchInterval: 5000,
+    refetchOnWindowFocus: true,
   });
