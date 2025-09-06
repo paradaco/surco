@@ -1,9 +1,9 @@
+import { queryKeys } from "@/constants/keys";
 import { useTheme } from "@/hooks/useThemeColor";
 import { Building } from "@/lib/buildWorld";
 import { useBuildingUpdate } from "@/lib/updates";
 import { useQueryClient } from "@tanstack/react-query";
 import { Pressable, Text, View } from "react-native";
-import { buildingQuery } from "./Facility";
 
 type Props = {
   buildingId: Building["id"];
@@ -25,7 +25,7 @@ const Menu = ({ buildingId }: Props) => {
             updateBulding();
 
             queryClient.invalidateQueries({
-              queryKey: [buildingQuery, buildingId],
+              queryKey: [...queryKeys.world.resource.stone.quarry, buildingId],
               exact: false,
             });
           }}

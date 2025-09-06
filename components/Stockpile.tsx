@@ -1,3 +1,4 @@
+import { queryKeys } from "@/constants/keys";
 import { useTheme } from "@/hooks/useThemeColor";
 import { getResourceOutput } from "@/lib/history";
 import { getResourcePerTick } from "@/lib/resources";
@@ -26,10 +27,10 @@ export const Stockipile = () => {
 
   return (
     <View style={{ width: "100%", alignItems: "center", marginTop: 32 }}>
-      <StockedResource color={forestPrimary} total={totalLogs} perTick={logsPerTick} />
+      {/* <StockedResource color={forestPrimary} total={totalLogs} perTick={logsPerTick} />
       <StockedResource color={stonePrimary} total={stoneTotal} perTick={stonePerTick} />
       <StockedResource color={waterPrimary} total={waterTotal} perTick={waterPerTick} />
-      <StockedResource color={grassPrimary} total={grassTotal} perTick={foodPetTick} />
+      <StockedResource color={grassPrimary} total={grassTotal} perTick={foodPetTick} /> */}
     </View>
   );
 };
@@ -50,48 +51,48 @@ const StockedResource = ({ total, perTick, color }: StockedResourceType) => (
 
 const useLogsPerTick = () =>
   useSuspenseQuery({
-    queryKey: ["world", "forrest", "production"],
+    queryKey: queryKeys.world.resource.forest.logger,
     queryFn: () => getResourcePerTick("forest"),
   });
 
 const useStonesPerTick = () =>
   useSuspenseQuery({
-    queryKey: ["world", "stone", "production"],
+    queryKey: queryKeys.world.resource.stone.quarry,
     queryFn: () => getResourcePerTick("stone"),
   });
 
 const useWaterPerTick = () =>
   useSuspenseQuery({
-    queryKey: ["world", "water", "production"],
+    queryKey: queryKeys.world.resource.water.pump,
     queryFn: () => getResourcePerTick("water"),
   });
 
 const useGrassPerTick = () =>
   useSuspenseQuery({
-    queryKey: ["world", "grass", "production"],
+    queryKey: queryKeys.world.resource.grass.food,
     queryFn: () => getResourcePerTick("grass"),
   });
 
 const useForestTotal = (from: Date) =>
   useSuspenseQuery({
-    queryKey: ["world", "forrest", "total"],
+    queryKey: queryKeys.world.resource.forest.total,
     queryFn: () => getResourceOutput("forest", from, new Date(), 5000),
   });
 
 const useStoneTotal = (from: Date) =>
   useSuspenseQuery({
-    queryKey: ["world", "stone", "total"],
+    queryKey: queryKeys.world.resource.stone.total,
     queryFn: () => getResourceOutput("stone", from, new Date(), 5000),
   });
 
 const useWaterTotal = (from: Date) =>
   useSuspenseQuery({
-    queryKey: ["world", "water", "total"],
+    queryKey: queryKeys.world.resource.stone.total,
     queryFn: () => getResourceOutput("water", from, new Date(), 5000),
   });
 
 const useGrassTotal = (from: Date) =>
   useSuspenseQuery({
-    queryKey: ["world", "grass", "total"],
+    queryKey: queryKeys.world.resource.grass.total,
     queryFn: () => getResourceOutput("grass", from, new Date(), 5000),
   });

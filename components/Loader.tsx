@@ -1,6 +1,4 @@
-import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
-import { differenceInMilliseconds } from "date-fns";
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import { StyleProp, View, ViewStyle } from "react-native";
 
 type Props = {
@@ -8,30 +6,30 @@ type Props = {
 };
 
 const Loader = ({ style }: Props) => {
-  const {
-    data: { invalidatedAt },
-  } = useInvalidator();
+  //   const {
+  //     data: { invalidatedAt },
+  //   } = useInvalidator();
   const [remaining, setRemaining] = useState(0);
-  const queryClient = useQueryClient();
+  //   const queryClient = useQueryClient();
 
-  const memoizedInvalidator = useCallback(
-    () => queryClient.invalidateQueries({ queryKey: ["world"], exact: false }),
-    [],
-  );
+  //   const memoizedInvalidator = useCallback(
+  //     () => queryClient.invalidateQueries({ queryKey: ["world"], exact: false }),
+  //     [],
+  //   );
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const timeDiff = differenceInMilliseconds(new Date(), invalidatedAt);
-      const percentage = ((timeDiff % 5000) / 5000) * 100;
-      const clampedProgress = Math.max(0, Math.min(percentage, 100));
+  //   useEffect(() => {
+  //     const interval = setInterval(() => {
+  //       const timeDiff = differenceInMilliseconds(new Date(), invalidatedAt);
+  //       const percentage = ((timeDiff % 5000) / 5000) * 100;
+  //       const clampedProgress = Math.max(0, Math.min(percentage, 100));
 
-      setRemaining(clampedProgress);
-    }, 350);
+  //       setRemaining(clampedProgress);
+  //     }, 350);
 
-    return () => {
-      clearInterval(interval);
-    };
-  }, [invalidatedAt]);
+  //     return () => {
+  //       clearInterval(interval);
+  //     };
+  //   }, [invalidatedAt]);
 
   return (
     <View
@@ -50,28 +48,28 @@ const Loader = ({ style }: Props) => {
   );
 };
 
-const useInvalidator = () =>
-  useSuspenseQuery({
-    queryKey: ["invalidator"],
-    queryFn: () => {
-      //   const queryClient = useQueryClient();
-      //   queryClient.invalidateQueries({ queryKey: ["world"], exact: false });
+// const useInvalidator = () =>
+//   useSuspenseQuery({
+//     queryKey: ["invalidator"],
+//     queryFn: () => {
+//       //   const queryClient = useQueryClient();
+//       //   queryClient.invalidateQueries({ queryKey: ["world"], exact: false });
 
-      return {
-        invalidatedAt: new Date(),
-      };
-    },
-    refetchOnWindowFocus: true,
-    refetchInterval: 5000,
-  });
+//       return {
+//         invalidatedAt: new Date(),
+//       };
+//     },
+//     refetchOnWindowFocus: true,
+//     refetchInterval: 5000,
+//   });
 
-const useQueryInvalidator = () => {
-  const queryClient = useQueryClient();
+// const useQueryInvalidator = () => {
+//   const queryClient = useQueryClient();
 
-  return {
-    invalidator: () => queryClient.invalidateQueries({ queryKey: ["world"], exact: false }),
-    invalidatedAt: new Date(),
-  };
-};
+//   return {
+//     invalidator: () => queryClient.invalidateQueries({ queryKey: ["world"], exact: false }),
+//     invalidatedAt: new Date(),
+//   };
+// };
 
-export default Loader;
+// export default Loader;

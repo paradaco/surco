@@ -1,3 +1,4 @@
+import { queryKeys } from "@/constants/keys";
 import { useTheme } from "@/hooks/useThemeColor";
 import { Building } from "@/lib/buildWorld";
 import { useBuildingUpdate } from "@/lib/updates";
@@ -24,7 +25,7 @@ const Menu = ({ buildingId }: Props) => {
             updateBulding();
 
             queryClient.invalidateQueries({
-              queryKey: ["world", "resource", "forest", "logger"],
+              queryKey: [...queryKeys.world.resource.forest.logger, buildingId],
               exact: false,
             });
           }}

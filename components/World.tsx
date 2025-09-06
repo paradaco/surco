@@ -1,4 +1,5 @@
 import { world } from "@/constants/fake-data";
+import { queryKeys } from "@/constants/keys";
 import { buildWorld } from "@/lib/buildWorld";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { View } from "react-native";
@@ -36,6 +37,6 @@ export const World = () => {
 
 const useGetResources = () =>
   useSuspenseQuery({
-    queryKey: ["world", "resources"],
+    queryKey: queryKeys.world.resource.this,
     queryFn: buildWorld,
   });

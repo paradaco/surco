@@ -1,5 +1,5 @@
 import ActivityBase from "@/components/ActivityBase";
-import Loader from "@/components/Loader";
+// import Loader from "@/components/Loader";
 import { Stockipile } from "@/components/Stockpile";
 import { World } from "@/components/World";
 import { useTheme } from "@/hooks/useThemeColor";
@@ -44,7 +44,7 @@ export default function HomeScreen() {
       </View>
       <World />
       <Stockipile />
-      <Loader />
+      {/* <Loader /> */}
     </ActivityBase>
   );
 }

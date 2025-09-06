@@ -1,10 +1,9 @@
 import { Cell as CellComponent } from "@/components/Cell";
+import { queryKeys } from "@/constants/keys";
 import { useTheme } from "@/hooks/useThemeColor";
 import { Building } from "@/lib/buildWorld";
 import { getBuildingLevel } from "@/lib/updates";
 import { useSuspenseQuery } from "@tanstack/react-query";
-
-export const buildingQuery = ["world", "grass", "farm"];
 
 type BuildingProps = {
   id: Building["id"];
@@ -16,7 +15,7 @@ const Facility = ({ id }: BuildingProps) => {
   } = useTheme();
 
   const { data } = useSuspenseQuery({
-    queryKey: [buildingQuery, id],
+    queryKey: [...queryKeys.world.resource.grass.food, id],
     queryFn: () => getBuildingLevel(id),
   });
 

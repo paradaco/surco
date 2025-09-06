@@ -1,4 +1,5 @@
 import { Cell as CellComponent } from "@/components/Cell";
+import { queryKeys } from "@/constants/keys";
 import { useTheme } from "@/hooks/useThemeColor";
 import { Building } from "@/lib/buildWorld";
 import { getBuildingLevel } from "@/lib/updates";
@@ -14,7 +15,7 @@ const Facility = ({ id }: BuildingProps) => {
   } = useTheme();
 
   const { data } = useSuspenseQuery({
-    queryKey: ["world", "resources", "forest", "logger", id],
+    queryKey: [...queryKeys.world.resource.forest.logger, id],
     queryFn: () => getBuildingLevel(id),
   });
 
