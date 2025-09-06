@@ -24,7 +24,7 @@ const Menu = ({ buildingId }: Props) => {
             updateBulding();
 
             queryClient.invalidateQueries({
-              queryKey: ["world", "forrest", "logger"],
+              queryKey: ["world", "resource", "forest", "logger"],
               exact: false,
             });
           }}

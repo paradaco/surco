@@ -4,8 +4,6 @@ import { Building } from "@/lib/buildWorld";
 import { getBuildingLevel } from "@/lib/updates";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
-export const buildingQuery = ["world", "forrest", "logger"];
-
 type BuildingProps = {
   id: Building["id"];
 };
@@ -16,7 +14,7 @@ const Facility = ({ id }: BuildingProps) => {
   } = useTheme();
 
   const { data } = useSuspenseQuery({
-    queryKey: ["world", "forrest", "logger", id],
+    queryKey: ["world", "resources", "forest", "logger", id],
     queryFn: () => getBuildingLevel(id),
   });
 
